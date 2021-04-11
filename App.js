@@ -25,7 +25,7 @@ const Stack = createStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Landing" component={LandingScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}}/>
@@ -33,4 +33,5 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
 
