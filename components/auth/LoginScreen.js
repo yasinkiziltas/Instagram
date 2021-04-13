@@ -1,67 +1,67 @@
 import React, { Component } from 'react'
-import { Button, View, TextInput, Image, Dimensions, StyleSheet, TouchableOpacity, Text} from 'react-native'
+import { Button, View, TextInput, Image, Dimensions, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import firebase from 'firebase'
 
-const width =  Dimensions.get('window').width
+const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
 
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             name: '',
-             email: '',
-             password: '',            
+            name: '',
+            email: '',
+            password: '',
         }
 
         this.onSignIn = this.onSignIn.bind(this)
     }
 
     onSignIn() {
-        const {email, password, name} = this.state;
+        const { email, password, name } = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((result) => {
-            alert('Success')
-            console.log('Successfull!', result)
-        })
-        .catch((error) => {
-            console.log('Error: ', error)
-        })
+            .then((result) => {
+                alert('Success')
+                console.log('Successfull!', result)
+            })
+            .catch((error) => {
+                console.log('Error: ', error)
+            })
     }
 
     render() {
         return (
-            <View style={{flex:1, justifyContent: 'center',alignItems: 'center'}}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-                <Image                 
+                <Image
                     source={require('../../assets/images/logo.png')}
                     resizeMode="contain"
-                    style={{width:200, height:200}}
+                    style={{ width: 200, height: 200 }}
                 />
 
-<View style={styles.inputContainer}>
-                <TextInput
-                 style={styles.input}
-                 placeholder="E-Mail"
-                 onChangeText={(email) => this.setState({email: email})}
-                />           
-            </View>
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="E-Mail"
+                        onChangeText={(email) => this.setState({ email: email })}
+                    />
+                </View>
 
-            <View style={styles.inputContainer}>
-                <TextInput
-                 style={styles.input}
-                 placeholder="Password"
-                 secureTextEntry={true}
-                 onChangeText={(password) => this.setState({password: password})}
-                />
-            </View>
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        onChangeText={(password) => this.setState({ password: password })}
+                    />
+                </View>
 
-            <TouchableOpacity style={styles.btnLogin} onPress={() => this.onSignIn()}>
-                <Text style={styles.btnText}>Login</Text>
-            </TouchableOpacity>            
-                
+                <TouchableOpacity style={styles.btnLogin} onPress={() => this.onSignIn()}>
+                    <Text style={styles.btnText}>Login</Text>
+                </TouchableOpacity>
+
             </View>
         )
     }
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         width: '90%',
         height: height / 15,
         borderColor: '#ccc',
-        borderWidth:1, 
+        borderWidth: 1,
         borderRadius: 3,
         borderBottomWidth: 1,
         alignItems: 'center',
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
     },
-    btnLogin:{
+    btnLogin: {
         width: '90%',
         height: height / 15,
         backgroundColor: 'blue',
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 3,
     },
-    btnText:{
+    btnText: {
         fontSize: 14,
         fontWeight: 'bold',
         color: '#ffffff',
