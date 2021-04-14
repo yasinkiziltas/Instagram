@@ -6,6 +6,13 @@ import * as firebase from 'firebase'
 import LandingScreen from './components/auth/LandingScreen'
 import LoginScreen from './components/auth/LoginScreen'
 import RegisterScreen from './components/auth/RegisterScreen'
+import MainScreen from './components/Main'
+
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0tcowI6jIUNF9sdQH5JAYBToNReLjZ0w",
@@ -77,9 +84,10 @@ export default class App extends Component {
 
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>User logged in</Text>
-      </View>
+      <Provider store={store}>
+        <MainScreen />
+      </Provider>
+
     )
 
   }
