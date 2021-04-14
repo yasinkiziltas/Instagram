@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Button } from 'react-native'
+import firebase, { auth } from 'firebase'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -11,21 +12,31 @@ export class Main extends Component {
         this.props.fetchUser();
     }
 
+    signOut() {
+        try {
+            auth().signOut();
+            console.log('Logout success')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     render() {
         const { currentUser } = this.props;
-        // console.log('Current user: ', currentUser)
+        console.log(currentUser)
 
-        if (currentUser === undefined) {
-            return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Undefined</Text>
-                </View>
-            )
-        }
+        // if (currentUser === undefined) {
+        //     return (
+        //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        //             <Text>Undefined</Text>
+        //         </View>
+        //     )
+        // }
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{currentUser.name} logged in</Text>
+                <Text>logged in</Text>
+                <Button title="Sign Out" onPress={() => this.signOut()} />
             </View>
         )
     }

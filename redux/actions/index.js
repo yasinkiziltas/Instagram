@@ -1,3 +1,4 @@
+import { USER_STATE_CHANGE } from '../constants/index'
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -10,7 +11,7 @@ export function fetchUser() {
             .get()
             .then((snapshot) => {
                 if (snapshot.exists) {
-                    console.log(snapshot.data())
+                    // console.log(snapshot.data())
                     dispatch({ type: USER_STATE_CHANGE, currentUser: snapshot.data() })
                 }
                 else {
