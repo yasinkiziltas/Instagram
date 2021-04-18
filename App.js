@@ -14,6 +14,7 @@ import rootReducer from './redux/reducers'
 import thunk from 'redux-thunk'
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyA0tcowI6jIUNF9sdQH5JAYBToNReLjZ0w",
   authDomain: "instagramapp-faa6a.firebaseapp.com",
@@ -85,7 +86,11 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <MainScreen />
+         <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
 
     )

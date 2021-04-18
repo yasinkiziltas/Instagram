@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
-import firebase, { auth } from 'firebase'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../redux/actions/index'
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import FeedScreen from './main/Feed'
+import ProfileScreen from './main/Profile'
+import AddScreen from './main/Add'
+
+const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
 
@@ -12,32 +18,33 @@ export class Main extends Component {
         this.props.fetchUser();
     }
 
-    signOut() {
-        try {
-            auth().signOut();
-            console.log('Logout success')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     render() {
-        const { currentUser } = this.props;
-        console.log(currentUser)
+        return (         
+            <Tab.Navigator>
+                 <Tab.Screen name="Feed" component={FeedScreen} 
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="home" color={color} size={size} />
+                        ),
+                    }}
+                 />
 
-        // if (currentUser === undefined) {
-        //     return (
-        //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        //             <Text>Undefined</Text>
-        //         </View>
-        //     )
-        // }
+                <Tab.Screen name="Add" component={AddScreen} 
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="plus" color={color} size={size} />
+                        ),
+                    }}
+                 />
 
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>logged in</Text>
-                <Button title="Sign Out" onPress={() => this.signOut()} />
-            </View>
+                 <Tab.Screen name="Profile" component={ProfileScreen} 
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons name="human" color={color} size={size} />
+                        ),
+                    }}
+                 />
+          </Tab.Navigator>
         )
     }
 }
