@@ -5,7 +5,7 @@ import {fetchUser} from '../../redux/actions/index'
 
 export default function Profile() {
 
-    const signOut = () => {
+    function signOut() {
         try {
            firebase.auth().signOut();
             console.log('Logout success')

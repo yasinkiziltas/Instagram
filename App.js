@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { View, Text, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import * as firebase from 'firebase'
+
 import LandingScreen from './components/auth/LandingScreen'
 import LoginScreen from './components/auth/LoginScreen'
 import RegisterScreen from './components/auth/RegisterScreen'
