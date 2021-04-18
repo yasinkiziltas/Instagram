@@ -8,9 +8,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
-import AddScreen from './main/Add'
+
 
 const Tab = createBottomTabNavigator();
+
+const EmptyScreen = () => {
+    return(null)
+}
 
 export class Main extends Component {
 
@@ -20,7 +24,7 @@ export class Main extends Component {
 
     render() {
         return (         
-            <Tab.Navigator>
+            <Tab.Navigator initialRouteName="Feed">
                  <Tab.Screen name="Feed" component={FeedScreen} 
                     options={{
                         tabBarIcon: ({color, size}) => (
@@ -29,7 +33,13 @@ export class Main extends Component {
                     }}
                  />
 
-                <Tab.Screen name="Add" component={AddScreen} 
+                <Tab.Screen name="AddContainer" component={EmptyScreen} 
+                    listeners={({ navigation }) => ({
+                        tabPress: event => {
+                            event.preventDefault();
+                            navigation.navigate("Add")
+                        }
+                    })}
                     options={{
                         tabBarIcon: ({color, size}) => (
                             <MaterialCommunityIcons name="plus" color={color} size={size} />
@@ -40,7 +50,7 @@ export class Main extends Component {
                  <Tab.Screen name="Profile" component={ProfileScreen} 
                     options={{
                         tabBarIcon: ({color, size}) => (
-                            <MaterialCommunityIcons name="human" color={color} size={size} />
+                            <MaterialCommunityIcons name="account-circle" color={color} size={size} />
                         ),
                     }}
                  />
