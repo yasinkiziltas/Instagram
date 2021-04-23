@@ -23,7 +23,6 @@ export default class LoginScreen extends Component {
         const { email, password, name } = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((result) => {
-                alert('Success')
                 console.log('Successfull!', result)
             })
             .catch((error) => {
