@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Image, TextInput, Button } from 'react-native'
 
 import firebase from 'firebase'
-require("firebase/firestore")
-require("firebase/firebase-storage")
+import "firebase/firestore"
+import "firebase/firebase-storage"
 
 
 export default function Save(props) {
@@ -17,14 +17,14 @@ export default function Save(props) {
         const response = await fetch(uri)
         const blob = await response.blob();
 
-        const task = firebase()
+        const task = firebase
             .storage()
             .ref()
             .child(childPath)
             .put(blob)
 
         const taskProgress = (snapshot) => {
-            console.log(`transferred: ${snapshot.bytes.Transferred}`)
+            console.log(`transferred: ${snapshot.bytesTransferred}`)
         }
 
         const taskCompleted = () => {
@@ -41,7 +41,7 @@ export default function Save(props) {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
             <Image source={{ uri: props.route.params.image }} />
             <TextInput
                 placeholder="Write a caption.."
