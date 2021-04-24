@@ -6,7 +6,7 @@ import "firebase/firestore"
 import "firebase/firebase-storage"
 
 
-export default function Save(props, navigation) {
+export default function Save(props) {
     const [caption, setCaption] = React.useState("")
     const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`
     console.log(childPath)
@@ -51,7 +51,7 @@ export default function Save(props, navigation) {
                 caption,
                 creation: firebase.firestore.FieldValue.serverTimestamp()
             }).then(function () {
-                navigation.popToPop()
+                props.navigation.popToPop()
             })
     }
 

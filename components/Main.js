@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchUser } from '../redux/actions/index'
+import { fetchUser, fetchUserPosts } from '../redux/actions/index'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -12,11 +12,17 @@ import ProfileScreen from './main/Profile'
 
 const Tab = createMaterialBottomTabNavigator();
 
-const EmptyScreen = () => {
+const EmptyScreen = () => { 
     return (null)
 }
 
 export class Main extends Component {
+
+    componentDidMount() {
+        this.props.fetchUser();
+        this.props.fetchUserPosts();
+    }
+    
     render() {
         return (
             <Tab.Navigator initialRouteName="Feed" labeled={false}>
@@ -57,6 +63,6 @@ export class Main extends Component {
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
 })
-const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchUser }, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchUser, fetchUserPosts }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)
