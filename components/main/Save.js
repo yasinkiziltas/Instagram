@@ -6,7 +6,7 @@ import "firebase/firestore"
 import "firebase/firebase-storage"
 
 
-export default function Save(props) {
+export default function Save(props, navigation) {
     const [caption, setCaption] = React.useState("")
     const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`
     console.log(childPath)
@@ -29,6 +29,7 @@ export default function Save(props) {
 
         const taskCompleted = () => {
             task.snapshot.ref.getDownloadURL().then((snapshot => {
+                savePostData(snapshot);
                 console.log(snapshot)
             }))
         }
@@ -38,6 +39,20 @@ export default function Save(props) {
         }
 
         task.on("state_changed", taskProgress, taskError, taskCompleted)
+    }
+
+    const savePostData = (downloadURL) => {
+        firebase.firestore()
+            .collection('posts')
+            .doc(firebase.auth().currentUser.uid)
+            .collection("userPosts")
+            .add({
+                downloadURL,
+                caption,
+                creation: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(function () {
+                navigation.popToPop()
+            })
     }
 
     return (
