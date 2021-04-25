@@ -77,6 +77,7 @@ export default function App({ navigation }) {
             <Button title="Take Photo" onPress={() => takePicture()} />
             <Button title="Take Photo From Gallery" onPress={() => takePictureFromGallery()} />
             <Button title="Save" onPress={() => navigation.navigate('Save', { image })} />
+            
             {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
         </View>
     );
