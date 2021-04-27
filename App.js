@@ -7,9 +7,11 @@ import * as firebase from 'firebase'
 import LandingScreen from './components/auth/LandingScreen'
 import LoginScreen from './components/auth/LoginScreen'
 import RegisterScreen from './components/auth/RegisterScreen'
+
 import MainScreen from './components/Main'
 import AddScreen from './components/main/Add'
 import SaveScreen from './components/main/Save'
+import SearchScreen from './components//main/Search'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
@@ -91,9 +93,10 @@ export default class App extends Component {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Main" component={MainScreen} />
             <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation} />
             <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation} />
+            <Stack.Screen name="Search" component={SearchScreen} navigation={this.props.navigation} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

@@ -8,11 +8,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
+import SearchScreen from './main/Search'
 
 
 const Tab = createMaterialBottomTabNavigator();
 
-const EmptyScreen = () => { 
+const EmptyScreen = () => {
     return (null)
 }
 
@@ -22,7 +23,7 @@ export class Main extends Component {
         this.props.fetchUser();
         this.props.fetchUserPosts();
     }
-    
+
     render() {
         return (
             <Tab.Navigator initialRouteName="Feed" labeled={false}>
@@ -30,6 +31,14 @@ export class Main extends Component {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home" color={color} size={24} />
+                        ),
+                    }}
+                />
+
+                <Tab.Screen name="Search" component={SearchScreen}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="magnify" color={color} size={24} />
                         ),
                     }}
                 />
