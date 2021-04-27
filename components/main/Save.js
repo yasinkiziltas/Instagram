@@ -56,7 +56,7 @@ export default function Save(props) {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Image source={{ uri: props.route.params.image }} />
             <TextInput
                 placeholder="Write a caption.."
