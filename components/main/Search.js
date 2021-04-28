@@ -28,10 +28,6 @@ export default function Search(props) {
 
     }
 
-    // useEffect(() => {
-    //     fetchUsers();
-    // }, []);
-
     return (
         <View>
             <TextInput placeholder="Type here.." onChangeText={(search) => fetchUsers(search)} />
