@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 function Profile(props) {
     const [user, setUser] = useState(null)
     const [userPost, setUserPosts] = useState([])
+    const [following, setFollowing] = useState(false)
     const { container, containerInfo, containerInfoText, containerGallery, image } = styles;
 
     useEffect(() => {
@@ -51,8 +52,33 @@ function Profile(props) {
                     setUserPosts(posts)
                 })
         }
-    }, [props.route.params.uid])
 
+        if (props.following.indexOf(props.route.params.uid) > - 1) {
+            setFollowing(true);
+        }
+        else {
+            setFollowing(false)
+        }
+    }, [props.route.params.uid, props.following])
+
+
+    const onFollow = () => {
+        firebase.firestore()
+            .collection("following")
+            .doc(firebase.auth().currentUser.uid)
+            .collection("userFollowing")
+            .doc(props.route.params.uid)
+            .set({})
+    }
+
+    const onUnfollow = () => {
+        firebase.firestore()
+            .collection("following")
+            .doc(firebase.auth().currentUser.uid)
+            .collection("userFollowing")
+            .doc(props.route.params.uid)
+            .delete()
+    }
 
 
     function signOut() {
@@ -67,11 +93,28 @@ function Profile(props) {
     if (user === null) {
         return <View />
     }
+
     return (
         <View style={container}>
             <View style={containerInfo}>
                 <Text>Welcome <Text style={containerInfoText}>{user.name}</Text></Text>
                 <Text>Welcome <Text style={containerInfoText}>{user.email}</Text></Text>
+
+                {props.route.params.uid !== firebase.auth().currentUser.uid ? (
+                    <View>
+                        {following ? (
+                            <Button
+                                title="Following"
+                                onPress={() => onUnfollow()}
+                            />
+                        ) : (
+                            <Button
+                                title="Follow"
+                                onPress={() => onFollow()}
+                            />
+                        )}
+                    </View>
+                ) : null}
             </View>
 
             <View style={containerGallery}>
@@ -91,7 +134,7 @@ function Profile(props) {
                 />
             </View>
 
-            {/* <Button title="Logout" onPress={() => signOut()} /> */}
+            <Button title="Logout" onPress={() => signOut()} />
 
         </View>
     )
@@ -123,7 +166,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
-    posts: store.userState.posts
+    posts: store.userState.posts,
+    following: store.userState.following
 })
 
 export default connect(mapStateToProps, null)(Profile);
+
+
