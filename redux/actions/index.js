@@ -53,7 +53,7 @@ export function fetchUserFollowing() {
             .collection("userFollowing")
             .onSnapshot((snapshot) => {
                 let following = snapshot.docs.map(doc => {
-                    const id = doc.id();
+                    const id = doc.id;
                     return id;
                 })
                 dispatch({ type: USER_FOLLOWING_STATE_CHANGE, following })
