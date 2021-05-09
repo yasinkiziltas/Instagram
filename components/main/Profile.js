@@ -69,6 +69,7 @@ function Profile(props) {
             .collection("userFollowing")
             .doc(props.route.params.uid)
             .set({})
+       
     }
 
     const onUnfollow = () => {
