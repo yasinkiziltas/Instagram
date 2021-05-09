@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE, USER_POST_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE } from '../constants/index'
+import { USER_STATE_CHANGE, USER_POST_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE } from '../constants/index'
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -114,7 +114,7 @@ export function fetchUsersFollowingPosts(uid) {
                     }
                 })
                 console.log(posts)
-                dispatch({ type: USERS_POST_STATE_CHANGE, posts, uid })
+                dispatch({ type: USERS_POSTS_STATE_CHANGE, posts, uid })
                 console.log(getState())
             })
     })
