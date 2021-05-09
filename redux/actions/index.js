@@ -78,7 +78,7 @@ export function fetchUsersData(uid) {
                         let user = snapshot.data();
                         user.uid = snapshot.id;
 
-                        dispatch({ type: USERS_DATA_STATE_CHANGE, currentUser: user });
+                        dispatch({ type: USERS_DATA_STATE_CHANGE, user });
                         dispatch(fetchUsersFollowingPosts(user.id));
                     }
                     else {
@@ -107,14 +107,10 @@ export function fetchUsersFollowingPosts(uid) {
                 let posts = snapshot.docs.map(doc => {
                     const data = doc.data();
                     const id = doc.id;
-                    return {
-                        id,
-                        ...data,
-                        user
-                    }
+                    return { id, ...data, user}                   
                 })
                 console.log(posts)
-                dispatch({ type: USERS_POSTS_STATE_CHANGE, posts, uid })
+                dispatch({ type: USERS_POSTS_STATE_CHANGE, posts, uid})
                 console.log(getState())
             })
     })

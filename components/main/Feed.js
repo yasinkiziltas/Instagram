@@ -25,13 +25,7 @@ function Feed(props) {
             })
 
             setPosts(posts);
-
-            if(!posts){
-                console.log('null!')
-            }
-            else{
-                console.log('Following posts: ', posts)
-            }
+ 
            
         }
 

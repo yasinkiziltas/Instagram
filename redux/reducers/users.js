@@ -14,7 +14,7 @@ export const users = (state = initialState, action) => {
                 users: [...state.users, action.user]
             }
 
-        case USERS_POSTS_STATE_CHANGE:
+        case USERS_POSTS_STATE_CHANGE: 
             return {
                 ...state,
                 usersLoaded: state.usersLoaded + 1,
